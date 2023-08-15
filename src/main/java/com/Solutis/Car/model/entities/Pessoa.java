@@ -3,24 +3,22 @@ package com.Solutis.Car.model.entities;
 import java.util.Date;
 
 import com.Solutis.Car.model.entities.enums.Sexo;
-
-import lombok.*;
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Data
-
 public class Pessoa {
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-	private String nome;
+    private String nome;
 
-	private Date dataNascimento;
+    @Temporal(TemporalType.DATE) // Adicionado o @Temporal para mapear a coluna dataNascimento
+    private Date dataNascimento;
 
-	private String cpf;
+    private String cpf;
 
-	private Sexo sexo;
-
+    private Sexo sexo;
 }

@@ -1,12 +1,12 @@
 package com.Solutis.Car.model.entities;
+
 import jakarta.persistence.Entity;
 import lombok.*;
 
 @Data
 @Entity
-@EqualsAndHashCode(callSuper=true)
-public class Funcionário extends Pessoa {
+@EqualsAndHashCode(callSuper = true)
+public class Funcionario extends Pessoa {
 
-	private String matricula;
-
+    private String matricula;
 }

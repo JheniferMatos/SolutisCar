@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 import lombok.*;
 
 @Data
@@ -18,8 +19,10 @@ public class Carro {
 
 	private BigDecimal valorDiaria;
 
+	@OneToOne
 	private Motorista motorista;
 
+	@OneToOne
 	private ApoliceSeguro apoliceSeguro;
 
 	private Collection<Aluguel> aluguel;

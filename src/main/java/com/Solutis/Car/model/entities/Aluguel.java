@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 import lombok.*;
 
 @Data
@@ -11,17 +12,18 @@ import lombok.*;
 public class Aluguel {
 
 	private Calendar dataPedido;
+    private Date dataEntrega;
+    private Date dataDevolucao;
+    private BigDecimal valorTotal;
 
-	private Date dataEntrega;
+    @OneToOne
+    private Carro carro;
 
-	private Date dataDevolucao;
+    @OneToOne
+    private Motorista motorista;
 
-	private BigDecimal valorTotal;
+    @OneToOne
+    private ApoliceSeguro apoliceSeguro;
 
-	private Carro carro;
-
-	private Motorista motorista;
-
-	private ApoliceSeguro apoliceSeguro;
 
 }
