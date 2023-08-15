@@ -1,4 +1,4 @@
-package com.Solutis.Car.Entities;
+package com.Solutis.Car.model.entities;
 import jakarta.persistence.Entity;
 import lombok.*;
 

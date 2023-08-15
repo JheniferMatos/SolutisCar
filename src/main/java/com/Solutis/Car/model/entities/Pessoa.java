@@ -1,10 +1,10 @@
-package com.Solutis.Car.Entities;
+package com.Solutis.Car.model.entities;
 
 import java.util.Date;
+
+import com.Solutis.Car.model.entities.enums.Sexo;
+
 import lombok.*;
-
-import com.Solutis.Car.Entities.enums.Sexo;
-
 import jakarta.persistence.*;
 
 @Entity

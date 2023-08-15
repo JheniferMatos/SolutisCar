@@ -1,4 +1,4 @@
-package com.Solutis.Car.Entities.enums;
+package com.Solutis.Car.model.entities.enums;
 
 public enum Categoria{
     HATCH_COMPACTO,

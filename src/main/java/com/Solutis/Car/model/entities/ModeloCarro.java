@@ -1,7 +1,9 @@
-package com.Solutis.Car.Entities;
+package com.Solutis.Car.model.entities;
 
 import java.util.Collection;
-import com.Solutis.Car.Entities.enums.Categoria;
+
+import com.Solutis.Car.model.entities.enums.Categoria;
+
 import jakarta.persistence.Entity;
 import lombok.*;
 
