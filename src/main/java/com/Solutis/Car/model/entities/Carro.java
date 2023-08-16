@@ -1,4 +1,4 @@
-package com.Solutis.Car.model.entities;
+package com.solutis.car.model.entities;
 
 import java.math.BigDecimal;
 import java.util.Collection;

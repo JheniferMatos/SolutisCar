@@ -1,8 +1,8 @@
-package com.Solutis.Car.model.entities;
+package com.solutis.car.model.entities;
 
 import java.util.Collection;
 
-import com.Solutis.Car.model.entities.enums.Categoria;
+import com.solutis.car.model.entities.enums.Categoria;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;

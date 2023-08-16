@@ -1,4 +1,4 @@
-package com.Solutis.Car.model.entities.enums;
+package com.solutis.car.model.entities.enums;
 
 public enum Sexo {
 	MASCULINO,

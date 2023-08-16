@@ -1,4 +1,4 @@
-package com.Solutis.Car.model.entities;
+package com.solutis.car.model.entities;
 
 import java.util.Collection;
 import jakarta.persistence.Entity;

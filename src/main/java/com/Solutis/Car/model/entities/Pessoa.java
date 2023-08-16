@@ -1,8 +1,8 @@
-package com.Solutis.Car.model.entities;
+package com.solutis.car.model.entities;
 
 import java.util.Date;
 
-import com.Solutis.Car.model.entities.enums.Sexo;
+import com.solutis.car.model.entities.enums.Sexo;
 import jakarta.persistence.*;
 import lombok.Data;
 
