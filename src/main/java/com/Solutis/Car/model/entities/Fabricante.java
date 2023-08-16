@@ -2,13 +2,15 @@ package com.solutis.car.model.entities;
 
 import java.util.Collection;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Data
 @Entity
 public class Fabricante {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String nome;
 

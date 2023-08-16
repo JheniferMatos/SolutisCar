@@ -3,13 +3,15 @@ package com.solutis.car.model.entities;
 import java.math.BigDecimal;
 import java.util.Collection;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Data
 @Entity
 public class Carro {
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
 	private String placa;
 
