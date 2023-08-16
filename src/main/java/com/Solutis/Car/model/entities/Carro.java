@@ -20,7 +20,7 @@ public class Carro {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
+
 	@NotBlank(message = "A placa é obrigatória")
     @Size(min = 7, max = 7, message = "A placa deve ter 7 caracteres")
     @Column(nullable = false, unique = true)
@@ -50,11 +50,13 @@ public class Carro {
 
 	@JsonIgnoreProperties("carro")
     @OneToMany(mappedBy = "carro")
-    private Collection<Aluguel> alugueis;
+    private Collection<Aluguel> aluguel;
 
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "carro_acessorio", joinColumns = @JoinColumn(name = "carro_id"), inverseJoinColumns = @JoinColumn(name = "acessorio_id"))
+	@JoinTable(name = "carro_acessorio", 
+			joinColumns = @JoinColumn(name = "carro_id"),
+			inverseJoinColumns = @JoinColumn(name = "acessorio_id"))
 	private Collection<Acessorio> acessorio;
 	
 	@JsonIgnoreProperties("carro")

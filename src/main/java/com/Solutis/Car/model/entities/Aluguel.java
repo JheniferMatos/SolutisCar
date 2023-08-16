@@ -34,7 +34,7 @@ public class Aluguel {
     private BigDecimal valorTotal;
 
     @JsonIgnoreProperties("aluguel")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "carro_id", nullable = false)
     private Carro carro;
 
