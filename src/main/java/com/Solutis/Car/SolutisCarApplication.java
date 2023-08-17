@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
+
 @OpenAPIDefinition(info = @Info(title = "solutis Car API", version = "1.0", description = "Documentation Solutis Car API v1.0"))
 @SpringBootApplication
 @EnableScheduling
