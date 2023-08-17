@@ -2,8 +2,6 @@ package com.solutis.car.model.entities;
 
 import java.util.Collection;
 
-
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;

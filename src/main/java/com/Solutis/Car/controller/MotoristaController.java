@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.solutis.car.model.dto.MotoristaDTO;
+
 import com.solutis.car.service.MotoristaService;
 
 @RestController
@@ -18,10 +19,14 @@ public class MotoristaController {
         this.motoristaService = motoristaService;
     }
 
+    //Criar motorista
     @PostMapping
     public ResponseEntity<MotoristaDTO> criarMotorista(@RequestBody MotoristaDTO motoristaDTO) {
         MotoristaDTO novoMotoristaDTO = motoristaService.criarMotorista(motoristaDTO);
         return new ResponseEntity<>(novoMotoristaDTO, HttpStatus.CREATED);
     }
+
+  
+
 
 }

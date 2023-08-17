@@ -1,7 +1,6 @@
 package com.solutis.car.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import org.springframework.context.annotation.Bean;
 
@@ -12,7 +11,6 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
-@EnableWebMvc
 public class SwaggerConfig {
 
     @Bean

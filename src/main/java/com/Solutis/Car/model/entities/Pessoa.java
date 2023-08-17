@@ -5,6 +5,7 @@ import java.util.Date;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.solutis.car.model.entities.enums.Sexo;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,6 +17,7 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,7 +35,7 @@ public abstract class Pessoa {
 
     @NotNull(message = "A data de nascimento é obrigatória")
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE) // Adicionado o @Temporal para mapear a coluna dataNascimento
+    @Temporal(TemporalType.DATE)
     private Date dataNascimento;
 
     @NotBlank(message = "O CPF é obrigatório")

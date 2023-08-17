@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 import com.solutis.car.model.dto.MotoristaDTO;
 import com.solutis.car.model.entities.Motorista;
 import com.solutis.car.repositories.MotoristaRepository;
-import com.solutis.car.mapper.MotoristaMapper; // Certifique-se de ajustar o caminho correto para o MotoristaMapper
+import com.solutis.car.mapper.MotoristaMapper; 
+import java.util.Optional;
 
 @Service
 public class MotoristaService {
