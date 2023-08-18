@@ -53,7 +53,7 @@ public class Carro {
     private Collection<Aluguel> aluguel;
 
 	@JsonIgnore
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany
 	@JoinTable(name = "carro_acessorio", 
 			joinColumns = @JoinColumn(name = "carro_id"),
 			inverseJoinColumns = @JoinColumn(name = "acessorio_id"))

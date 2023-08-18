@@ -20,10 +20,17 @@ public class MotoristaService {
         this.motoristaMapper = motoristaMapper;
     }
 
+    //Criar motorista
     public MotoristaDTO criarMotorista(MotoristaDTO motoristaDTO) {
         Motorista motorista = motoristaMapper.toEntity(motoristaDTO);
         Motorista novoMotorista = motoristaRepository.save(motorista);
         return motoristaMapper.toDto(novoMotorista);
+    }
+
+    //Obter motorista por id
+    public Optional<MotoristaDTO> obterMotoristaPorId(Long id) {
+        Optional<Motorista> motorista = motoristaRepository.findById(id);
+        return motorista.map(motoristaMapper::toDto);
     }
 
 

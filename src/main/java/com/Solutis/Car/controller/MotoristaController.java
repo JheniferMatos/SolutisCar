@@ -26,7 +26,13 @@ public class MotoristaController {
         return new ResponseEntity<>(novoMotoristaDTO, HttpStatus.CREATED);
     }
 
-  
+    //Obter motorista por id
+    @GetMapping("/{id}")
+    public ResponseEntity<MotoristaDTO> obterMotoristaPorId(@PathVariable Long id) {
+        return motoristaService.obterMotoristaPorId(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
 
 }
