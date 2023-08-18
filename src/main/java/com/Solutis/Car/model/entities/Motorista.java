@@ -22,7 +22,7 @@ public class Motorista extends Pessoa {
 	private String numeroCNH;
 
 	@JsonIgnoreProperties({"motorista"})
-	@OneToMany(mappedBy = "motorista")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "motorista")
 	private Collection<Aluguel> aluguel;
 
 }
