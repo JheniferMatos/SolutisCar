@@ -1,42 +1,52 @@
 package com.solutis.car.controller;
 
+import com.solutis.car.model.dto.MotoristaDTO;
+import com.solutis.car.service.MotoristaService;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.solutis.car.model.dto.MotoristaDTO;
-import java.util.List;
-import com.solutis.car.service.MotoristaService;
 
 @RestController
 @RequestMapping("/clientes")
 public class MotoristaController {
 
-    private final MotoristaService motoristaService;
+    @Autowired
+    private MotoristaService motoristaService;
 
-    public MotoristaController(MotoristaService motoristaService) {
-        this.motoristaService = motoristaService;
-    }
-
-    // Criar motorista
     @PostMapping
-    public ResponseEntity<MotoristaDTO> criarMotorista(@RequestBody MotoristaDTO motoristaDTO) {
-        MotoristaDTO novoMotoristaDTO = motoristaService.criarMotorista(motoristaDTO);
-        return new ResponseEntity<>(novoMotoristaDTO, HttpStatus.CREATED);
+    public ResponseEntity<String> cadastrarMotorista(@RequestBody MotoristaDTO motoristaDTO) {
+        motoristaService.add(motoristaDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Motorista cadastrado com sucesso!");
     }
 
-    // Obter motorista por id
-    @GetMapping("/{id}")
-    public ResponseEntity<MotoristaDTO> obterMotoristaPorId(@PathVariable Long id) {
-        return motoristaService.obterMotoristaPorId(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    // Listar todos os clientes
     @GetMapping
     public ResponseEntity<List<MotoristaDTO>> listarMotoristas() {
-        List<MotoristaDTO> motoristas = motoristaService.listarMotoristas();
+        List<MotoristaDTO> motoristas = motoristaService.findAll();
         return ResponseEntity.ok(motoristas);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarMotorista(@PathVariable Long id) {
+        motoristaService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MotoristaDTO> atualizarMotorista(
+            @PathVariable Long id,
+            @RequestBody MotoristaDTO motoristaDTO) {
+        MotoristaDTO updatedMotorista = motoristaService.update(id, motoristaDTO);
+        return ResponseEntity.ok(updatedMotorista);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MotoristaDTO> buscarMotoristaPorId(@PathVariable Long id) {
+        MotoristaDTO motorista = motoristaService.findById(id);
+        return ResponseEntity.ok(motorista);
     }
 
 }

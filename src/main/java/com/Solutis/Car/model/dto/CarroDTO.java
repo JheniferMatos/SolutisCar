@@ -1,7 +1,10 @@
 package com.solutis.car.model.dto;
 
 import java.math.BigDecimal;
-import java.util.Collection;
+
+import com.solutis.car.model.entities.Carro;
+
+// import com.solutis.car.model.entities.Carro;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,12 +39,30 @@ public class CarroDTO {
     @Size(min = 3, max = 200, message = "A imagem deve ter entre 3 e 200 caracteres")
     private String imageUrl;
 
-    private ApoliceSeguroDTO apoliceSeguro;
+    private Long modeloCarroId;
 
-    private Collection<AluguelDTO> aluguel;
+    private Long[] acessoriosId;
 
-    private Collection<AcessorioDTO> acessorio;
+    private Boolean alugado = false;
 
     private ModeloCarroDTO modeloCarro;
+    private FabricanteDTO fabricante;
+
+    public CarroDTO(Carro entity) {
+        this.id = entity.getId();
+        this.placa = entity.getPlaca();
+        this.chassi = entity.getChassi();
+        this.cor = entity.getCor();
+        this.valorDiaria = entity.getValorDiaria();
+        this.modeloCarroId = entity.getModeloCarro().getId();
+        // this.acessoriosId = getAcessoriosId(entity);
+        this.alugado = entity.getAluguel() != null && !entity.getAluguel().isEmpty();
+    }
+    
+    // private Long[] getAcessoriosId(Carro entity) {
+    //     return entity.getAcessorio().stream()
+    //             .map(acessorio -> acessorio.getId())
+    //             .toArray(Long[]::new);
+    // }
 
 }

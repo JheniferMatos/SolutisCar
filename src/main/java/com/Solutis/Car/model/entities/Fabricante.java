@@ -22,6 +22,6 @@ public class Fabricante {
     private String nome;
 
     @JsonIgnoreProperties({"fabricante"})
-    @OneToMany(mappedBy = "fabricante")
+    @OneToMany(mappedBy = "fabricante",cascade = CascadeType.ALL)
     private Collection<ModeloCarro> modeloCarro;
 }

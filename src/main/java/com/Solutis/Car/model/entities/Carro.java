@@ -7,15 +7,18 @@ import org.hibernate.validator.constraints.URL;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.solutis.car.model.dto.CarroDTO;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Data
 @Entity
-
+@AllArgsConstructor
+@NoArgsConstructor
 public class Carro {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +38,7 @@ public class Carro {
 	@Size(min = 3, max = 200, message = "A cor deve ter entre 3 e 200 caracteres")
 	private String cor;
 
-	@NotBlank(message = "O valor da diária é obrigatório")
+	@NotNull(message = "O valor da diária é obrigatório")
 	@Column(nullable = false)
 	private BigDecimal valorDiaria;
 
@@ -52,6 +55,8 @@ public class Carro {
     @OneToMany(mappedBy = "carro")
     private Collection<Aluguel> aluguel;
 
+	private boolean alugado;
+
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "carro_acessorio", 
@@ -60,8 +65,16 @@ public class Carro {
 	private Collection<Acessorio> acessorio;
 	
 	@JsonIgnoreProperties("carro")
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "modelo_carro_id", nullable = false)
 	private ModeloCarro modeloCarro;
 
+	public Carro(CarroDTO carroDTO, ModeloCarro modeloCarro) {
+		this.placa = carroDTO.getPlaca();
+		this.chassi = carroDTO.getChassi();
+		this.cor = carroDTO.getCor();
+		this.valorDiaria = carroDTO.getValorDiaria();
+		this.modeloCarro = modeloCarro;
+		this.alugado = false;
+	}
 }

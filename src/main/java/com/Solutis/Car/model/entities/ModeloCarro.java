@@ -23,11 +23,11 @@ public class ModeloCarro {
 	@Column(nullable = false)
 	private String descricao;
 
-	@OneToMany(mappedBy = "modeloCarro")
+	@OneToMany(mappedBy = "modeloCarro",cascade = CascadeType.ALL)
 	private Collection<Carro> carro;
 
 	@JsonIgnoreProperties({"modeloCarro"})
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fabricante_id", nullable = false)
 	private Fabricante fabricante;
 
@@ -37,3 +37,4 @@ public class ModeloCarro {
 	private Categoria categoria;
 
 }
+

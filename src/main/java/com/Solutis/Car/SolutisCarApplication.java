@@ -11,7 +11,6 @@ import io.swagger.v3.oas.annotations.info.Info;
 @SpringBootApplication
 @EnableScheduling
 public class SolutisCarApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(SolutisCarApplication.class, args);
 	}

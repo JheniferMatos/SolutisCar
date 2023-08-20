@@ -1,49 +1,61 @@
 package com.solutis.car.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.solutis.car.mapper.MotoristaMapper;
 import com.solutis.car.model.dto.MotoristaDTO;
 import com.solutis.car.model.entities.Motorista;
 import com.solutis.car.repositories.MotoristaRepository;
-import com.solutis.car.mapper.MotoristaMapper;
+import com.solutis.car.service.exception.NotFoundException;
+
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-public class MotoristaService {
+public class MotoristaService implements CrudService<MotoristaDTO> {
 
-    private final MotoristaRepository motoristaRepository;
-    private final MotoristaMapper motoristaMapper;
+    @Autowired
+    private MotoristaRepository repository;
 
-    public MotoristaService(MotoristaRepository motoristaRepository, MotoristaMapper motoristaMapper) {
-        this.motoristaRepository = motoristaRepository;
-        this.motoristaMapper = motoristaMapper;
+    @Autowired
+    private MotoristaMapper mapper;
+
+    @Transactional(readOnly = true)
+    public MotoristaDTO findById(Long id) {
+        return this.mapper.toDto(this.repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Motorista não encontrado")));
     }
 
-    // Criar motorista
-    public MotoristaDTO criarMotorista(MotoristaDTO motoristaDTO) {
-        Motorista motorista = motoristaMapper.toEntity(motoristaDTO);
-        Motorista novoMotorista = motoristaRepository.save(motorista);
-        return motoristaMapper.toDto(novoMotorista);
+    @Transactional(readOnly = true)
+    public List<MotoristaDTO> findAll() {
+        return this.repository.findAll().stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
     }
 
-    // Obter motorista por id
-    public Optional<MotoristaDTO> obterMotoristaPorId(Long id) {
-        Optional<Motorista> motorista = motoristaRepository.findById(id);
-        return motorista.map(motoristaMapper::toDto);
+    @Transactional
+    public MotoristaDTO add(MotoristaDTO motoristaDTO) {
+        Motorista motorista = this.mapper.toEntity(motoristaDTO);
+        motorista = repository.save(motorista);
+        return this.mapper.toDto(motorista);
     }
 
-    public List<MotoristaDTO> listarMotoristas() {
-    List<Motorista> motoristas = motoristaRepository.findAll();
-    List<MotoristaDTO> motoristasDTO = new ArrayList<>();
-
-    for (Motorista motorista : motoristas) {
-        motoristasDTO.add(motoristaMapper.toDto(motorista));
+    @Transactional
+    public MotoristaDTO update(Long id, MotoristaDTO motoristaDTO) {
+        Motorista existingMotorista = repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Motorista não encontrado"));
+        Motorista motoristaUpdate = this.mapper.toEntity(motoristaDTO);
+        motoristaUpdate.setId(existingMotorista.getId());
+        motoristaUpdate = repository.save(motoristaUpdate);
+        return this.mapper.toDto(motoristaUpdate);
     }
 
-    return motoristasDTO;
-}
-
-
-
+    @Transactional
+    public void deleteById(Long id) {
+        Motorista motorista = repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Motorista não encontrado"));
+        repository.delete(motorista);
+    }
 }

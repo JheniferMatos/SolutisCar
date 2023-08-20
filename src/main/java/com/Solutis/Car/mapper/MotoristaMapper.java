@@ -1,6 +1,7 @@
 package com.solutis.car.mapper;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.solutis.car.model.entities.Motorista;
 import com.solutis.car.model.dto.MotoristaDTO;
@@ -8,12 +9,8 @@ import com.solutis.car.model.dto.MotoristaDTO;
 @Component
 public class MotoristaMapper {
 
-    private final ModelMapper modelMapper;
-
-    
-    public MotoristaMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
+    @Autowired
+    private ModelMapper modelMapper;
 
     public MotoristaDTO toDto(Motorista motorista) {
         return modelMapper.map(motorista, MotoristaDTO.class);
