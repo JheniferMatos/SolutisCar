@@ -2,16 +2,17 @@ package com.solutis.car.model.dto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-// import java.util.ArrayList;
-import java.util.Collection;
-// import java.util.stream.Collectors;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.solutis.car.model.entities.Acessorio;
+import com.solutis.car.model.entities.Carro;
+import com.solutis.car.model.entities.Fabricante;
+
+// import com.solutis.car.model.entities.ModeloCarro;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-// import com.solutis.car.model.entities.Acessorio;
-import com.solutis.car.model.entities.Carro;
-// import com.solutis.car.model.entities.ModeloCarro;
-
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -20,8 +21,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class CarroDTO {
 
     private Long id;
@@ -46,11 +47,13 @@ public class CarroDTO {
     private String imageUrl;
 
     @JsonIgnore
-    private Collection<AcessorioDTO> acessorios = new ArrayList<>();
+    @OneToMany(mappedBy = "carro")
+    private List<Acessorio> acessorios;
 
     private Boolean alugado = false;
 
     private ModeloCarroDTO modeloCarro;
+    
     private FabricanteDTO fabricante;
 
     public CarroDTO(Carro entity) {
@@ -61,10 +64,8 @@ public class CarroDTO {
         this.valorDiaria = entity.getValorDiaria();
         this.alugado = entity.getAluguel() != null && !entity.getAluguel().isEmpty();
         this.imageUrl = entity.getImageUrl();
-        this.acessorios = entity.getAcessorios().stream().map(acessorio -> new AcessorioDTO(acessorio))
-                .collect(Collectors.toList());
-        
-        }
-
+        this.acessorios = entity.getAcessorios();
+        this.fabricante = new FabricanteDTO(entity.getNome());
     }
+}
 

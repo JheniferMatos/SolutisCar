@@ -1,14 +1,16 @@
 package com.solutis.car.model.entities;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
 
+import java.util.Collection;
+import java.util.HashSet;
 
 import org.hibernate.validator.constraints.URL;
-
+import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.solutis.car.model.dto.CarroDTO;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -21,13 +23,13 @@ import lombok.*;
 @NoArgsConstructor
 public class Carro {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	@NotBlank(message = "A placa é obrigatória")
-    @Size(min = 7, max = 7, message = "A placa deve ter 7 caracteres")
-    @Column(nullable = false, unique = true)
-    private String placa;
+	@Size(min = 7, max = 7, message = "A placa deve ter 7 caracteres")
+	@Column(nullable = false, unique = true)
+	private String placa;
 
 	@NotBlank(message = "O chassi é obrigatório")
 	@Size(min = 17, max = 17, message = "O chassi deve ter 17 caracteres")
@@ -52,30 +54,30 @@ public class Carro {
 	// private ApoliceSeguro apoliceSeguro;
 
 	@JsonIgnoreProperties("carro")
-    @OneToMany(mappedBy = "carro")
-    private Collection<Aluguel> aluguel;
+	@OneToMany(mappedBy = "carro")
+	private Collection<Aluguel> aluguel;
 
 	private boolean alugado;
 
 	@JsonIgnore
-	@ManyToMany
-    @JoinTable(name = "tb_carro_acessorio", joinColumns = @JoinColumn(name = "carro_id"), inverseJoinColumns = @JoinColumn(name = "acessorio_id"))
-	private Collection<Acessorio> acessorios = new ArrayList<>();
-	
+	@OneToMany(mappedBy = "carro", cascade = CascadeType.ALL)
+	private Set<Acessorio> acessorios = new HashSet<>();
+
 	@JsonIgnoreProperties("carro")
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "modelo_carro_id", nullable = false)
 	private ModeloCarro modeloCarro;
 
-	// public Carro(CarroDTO carroDTO, ModeloCarro modeloCarro, Collection<Acessorio> acessorios) {
-	// 	this.placa = carroDTO.getPlaca();
-	// 	this.chassi = carroDTO.getChassi();
-	// 	this.cor = carroDTO.getCor();
-	// 	this.valorDiaria = carroDTO.getValorDiaria();
-	// 	this.modeloCarro = modeloCarro;
-	// 	this.alugado = false;
-	// 	this.acessorios = acessorios;
-	// 	this.imageUrl = carroDTO.getImageUrl();
+	public Carro(CarroDTO carroDTO) {
+	this.placa = carroDTO.getPlaca();
+	this.chassi = carroDTO.getChassi();
+	this.cor = carroDTO.getCor();
+	this.valorDiaria = carroDTO.getValorDiaria();
+	// this.modeloCarro = modeloCarro;
+	this.alugado = false;
+	// this.acessorios = acessorios;
+	this.imageUrl = carroDTO.getImageUrl();
+	}
 
-	// }
+	
 }

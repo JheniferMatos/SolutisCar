@@ -14,5 +14,5 @@ public class SolutisCarApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SolutisCarApplication.class, args);
 	}
-
+ 
 }

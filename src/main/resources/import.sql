@@ -1,1 +1,10 @@
+INSERT INTO acessorio (descricao) VALUES ('Ar condicionado');
+INSERT INTO acessorio (descricao) VALUES ('Vidros elétricos');
+INSERT INTO acessorio (descricao) VALUES ('Travas elétricas');
+INSERT INTO acessorio (descricao) VALUES ('Direção hidráulica');
 INSERT INTO acessorio (descricao) VALUES ('Airbag');
+INSERT INTO acessorio (descricao) VALUES ('Freios ABS');
+INSERT INTO acessorio (descricao) VALUES ('Bancos de couro');
+INSERT INTO acessorio (descricao) VALUES ('Central multimídia');
+INSERT INTO acessorio (descricao) VALUES ('Sensor de estacionamento');
+INSERT INTO acessorio (descricao) VALUES ('Câmera de ré');

@@ -47,6 +47,16 @@ public class CarroController {
         return ResponseEntity.ok(carroAtualizadoDTO);
     }
 
+    @GetMapping("/disponiveis")
+    public ResponseEntity<List<CarroDTO>> getVeiculosDisponiveis(
+            @RequestParam(required = false) String categoria,
+            @RequestParam(required = false) List<String> acessorios) {
+
+        List<CarroDTO> veiculosDisponiveis = carroService.findVeiculosDisponiveis(categoria, acessorios);
+        return ResponseEntity.ok(veiculosDisponiveis);
+    }
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarCarro(@PathVariable Long id) {
         carroService.deleteById(id);

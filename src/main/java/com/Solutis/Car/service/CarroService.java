@@ -5,27 +5,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.solutis.car.mapper.CarroMapper;
-import com.solutis.car.model.dto.AcessorioDTO;
 // import com.solutis.car.mapper.FabricanteMapper;
 // import com.solutis.car.mapper.ModeloCarroMapper;
 // import com.solutis.car.model.dto.CarroCompletoDTO;
 import com.solutis.car.model.dto.CarroDTO;
 // import com.solutis.car.model.dto.FabricanteDTO;
 // import com.solutis.car.model.dto.ModeloCarroDTO;
-import com.solutis.car.model.entities.Acessorio;
+// import com.solutis.car.model.entities.Acessorio;
 import com.solutis.car.model.entities.Carro;
 import com.solutis.car.model.entities.Fabricante;
 import com.solutis.car.model.entities.ModeloCarro;
 
+// import com.solutis.car.repositories.AcessorioRepository;
 import com.solutis.car.repositories.CarroRepository;
 import com.solutis.car.repositories.FabricanteRepository;
 import com.solutis.car.service.exception.NotFoundException;
 import java.util.List;
 
-
 import com.solutis.car.repositories.ModeloCarroRepository;
-import java.util.ArrayList;
-
 import java.util.stream.Collectors;
 
 @Service
@@ -106,33 +103,22 @@ public class CarroService implements CrudService<CarroDTO> {
         // Salvar fabricante e modelo do carro
         fabricanteRepository.save(fabricante);
         modeloCarroRepository.save(modeloCarro);
-
-        //adicionar acessórios ao carro
-        List<Acessorio> acessorios = new ArrayList<>();
-        for (AcessorioDTO acessorioDTO : carroCompletoDTO.getAcessorios()) {
-            Acessorio acessorio = new Acessorio();
-            acessorio.setDescricao(acessorioDTO.getDescricao());
-            acessorios.add(acessorio);
-        }
-        carro.setAcessorios(acessorios);
-
-        // Salvar carro
-
         
 
-        // Adicionar acessórios ao carro
-        // List<Acessorio> acessorios = new ArrayList<>();
+        // adicionar acessórios ao carro
+        
         // for (Acessorio acessorioDTO : carroCompletoDTO.getAcessorios()) {
         //     Acessorio acessorio = new Acessorio();
         //     acessorio.setDescricao(acessorioDTO.getDescricao());
+        //     acessorio.setCarro(carro);
+        //     carro.getAcessorios().add(acessorio); // Adicionar o acessório ao Set de acessórios
         // }
-        // carro.setAcessorios(acessorios); 
-
-        // Salvar carro
+        
         repository.save(carro);
 
-        return new CarroDTO(carro); 
+        return new CarroDTO();
     }
+
 
     @Transactional
     public CarroDTO update(Long id, CarroDTO carroDTO) {
@@ -155,4 +141,17 @@ public class CarroService implements CrudService<CarroDTO> {
     public CarroDTO add(CarroDTO payload) {
         throw new UnsupportedOperationException("Unimplemented method 'add'");
     }
+
+    @Transactional(readOnly = true)
+    public List<CarroDTO> findVeiculosDisponiveis(String categoria, List<String> acessorios) {
+        List<Carro> veiculosDisponiveis = repository.findVeiculosDisponiveis(categoria, acessorios);
+        return veiculosDisponiveis.stream().map(mapper::toDto).collect(Collectors.toList());
+    }
+ 
 }
+
+
+
+
+
+

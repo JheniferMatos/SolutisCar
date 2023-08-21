@@ -1,7 +1,5 @@
 package com.solutis.car.model.entities;
 
-import java.util.Collection;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -12,16 +10,15 @@ import lombok.*;
 @Entity
 public class Acessorio {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@NotBlank(message = "A descrição é obrigatória")
-	@Size(min = 3, max = 200, message = "A descrição deve ter entre 3 e 200 caracteres")
-	@Column(nullable = false)
-	private String descricao;
+    @NotBlank(message = "A descrição é obrigatória")
+    @Size(min = 3, max = 200, message = "A descrição deve ter entre 3 e 200 caracteres")
+    @Column(nullable = false)
+    private String descricao;
 
-	// @JsonIgnore
-	@ManyToMany(mappedBy = "acessorios")
-	private Collection<Carro> carro;
-
+    @ManyToOne
+    @JoinColumn(name = "carro_id")
+    private Carro carro;
 }
