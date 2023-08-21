@@ -1,10 +1,16 @@
 package com.solutis.car.model.dto;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+// import java.util.ArrayList;
+import java.util.Collection;
+// import java.util.stream.Collectors;
+import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+// import com.solutis.car.model.entities.Acessorio;
 import com.solutis.car.model.entities.Carro;
-
-// import com.solutis.car.model.entities.Carro;
+// import com.solutis.car.model.entities.ModeloCarro;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -39,9 +45,8 @@ public class CarroDTO {
     @Size(min = 3, max = 200, message = "A imagem deve ter entre 3 e 200 caracteres")
     private String imageUrl;
 
-    private Long modeloCarroId;
-
-    private Long[] acessoriosId;
+    @JsonIgnore
+    private Collection<AcessorioDTO> acessorios = new ArrayList<>();
 
     private Boolean alugado = false;
 
@@ -54,15 +59,12 @@ public class CarroDTO {
         this.chassi = entity.getChassi();
         this.cor = entity.getCor();
         this.valorDiaria = entity.getValorDiaria();
-        this.modeloCarroId = entity.getModeloCarro().getId();
-        // this.acessoriosId = getAcessoriosId(entity);
         this.alugado = entity.getAluguel() != null && !entity.getAluguel().isEmpty();
-    }
-    
-    // private Long[] getAcessoriosId(Carro entity) {
-    //     return entity.getAcessorio().stream()
-    //             .map(acessorio -> acessorio.getId())
-    //             .toArray(Long[]::new);
-    // }
+        this.imageUrl = entity.getImageUrl();
+        this.acessorios = entity.getAcessorios().stream().map(acessorio -> new AcessorioDTO(acessorio))
+                .collect(Collectors.toList());
+        
+        }
 
-}
+    }
+

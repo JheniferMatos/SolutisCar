@@ -1,14 +1,14 @@
 package com.solutis.car.model.entities;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
+
 
 import org.hibernate.validator.constraints.URL;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.solutis.car.model.dto.CarroDTO;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -48,8 +48,8 @@ public class Carro {
 	@Column(nullable = false)
 	private String imageUrl;
 
-	@OneToOne
-	private ApoliceSeguro apoliceSeguro;
+	// @OneToOne
+	// private ApoliceSeguro apoliceSeguro;
 
 	@JsonIgnoreProperties("carro")
     @OneToMany(mappedBy = "carro")
@@ -59,22 +59,23 @@ public class Carro {
 
 	@JsonIgnore
 	@ManyToMany
-	@JoinTable(name = "carro_acessorio", 
-			joinColumns = @JoinColumn(name = "carro_id"),
-			inverseJoinColumns = @JoinColumn(name = "acessorio_id"))
-	private Collection<Acessorio> acessorio;
+    @JoinTable(name = "tb_carro_acessorio", joinColumns = @JoinColumn(name = "carro_id"), inverseJoinColumns = @JoinColumn(name = "acessorio_id"))
+	private Collection<Acessorio> acessorios = new ArrayList<>();
 	
 	@JsonIgnoreProperties("carro")
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "modelo_carro_id", nullable = false)
 	private ModeloCarro modeloCarro;
 
-	public Carro(CarroDTO carroDTO, ModeloCarro modeloCarro) {
-		this.placa = carroDTO.getPlaca();
-		this.chassi = carroDTO.getChassi();
-		this.cor = carroDTO.getCor();
-		this.valorDiaria = carroDTO.getValorDiaria();
-		this.modeloCarro = modeloCarro;
-		this.alugado = false;
-	}
+	// public Carro(CarroDTO carroDTO, ModeloCarro modeloCarro, Collection<Acessorio> acessorios) {
+	// 	this.placa = carroDTO.getPlaca();
+	// 	this.chassi = carroDTO.getChassi();
+	// 	this.cor = carroDTO.getCor();
+	// 	this.valorDiaria = carroDTO.getValorDiaria();
+	// 	this.modeloCarro = modeloCarro;
+	// 	this.alugado = false;
+	// 	this.acessorios = acessorios;
+	// 	this.imageUrl = carroDTO.getImageUrl();
+
+	// }
 }

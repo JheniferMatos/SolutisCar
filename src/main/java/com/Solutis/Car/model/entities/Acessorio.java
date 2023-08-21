@@ -2,8 +2,6 @@ package com.solutis.car.model.entities;
 
 import java.util.Collection;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -22,9 +20,8 @@ public class Acessorio {
 	@Column(nullable = false)
 	private String descricao;
 
-	@JsonIgnore
-	@ManyToMany
-	@JoinTable(name = "carro_acessorio", joinColumns = @JoinColumn(name = "acessorio_id"), inverseJoinColumns = @JoinColumn(name = "carro_id"))
+	// @JsonIgnore
+	@ManyToMany(mappedBy = "acessorios")
 	private Collection<Carro> carro;
 
 }
