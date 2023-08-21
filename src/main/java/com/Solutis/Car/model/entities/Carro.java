@@ -3,13 +3,14 @@ package com.solutis.car.model.entities;
 import java.math.BigDecimal;
 
 import java.util.Collection;
-import java.util.HashSet;
+
+import java.util.List;
 
 import org.hibernate.validator.constraints.URL;
-import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.solutis.car.model.dto.CarroDTO;
+import com.solutis.car.model.dto.FabricanteDTO;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -61,23 +62,25 @@ public class Carro {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "carro", cascade = CascadeType.ALL)
-	private Set<Acessorio> acessorios = new HashSet<>();
+	private List<Acessorio> acessorios;
 
 	@JsonIgnoreProperties("carro")
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "modelo_carro_id", nullable = false)
 	private ModeloCarro modeloCarro;
+	private FabricanteDTO fabricante;
 
-	public Carro(CarroDTO carroDTO) {
-	this.placa = carroDTO.getPlaca();
-	this.chassi = carroDTO.getChassi();
-	this.cor = carroDTO.getCor();
-	this.valorDiaria = carroDTO.getValorDiaria();
-	// this.modeloCarro = modeloCarro;
-	this.alugado = false;
-	// this.acessorios = acessorios;
-	this.imageUrl = carroDTO.getImageUrl();
-	}
+	public Carro(Carro entity) {
+        this.id = entity.getId();
+        this.placa = entity.getPlaca();
+        this.chassi = entity.getChassi();
+        this.cor = entity.getCor();
+        this.valorDiaria = entity.getValorDiaria();
+        this.alugado = entity.getAluguel() != null && !entity.getAluguel().isEmpty();
+        this.imageUrl = entity.getImageUrl();
+        this.acessorios = entity.getAcessorios();
+        this.fabricante = new FabricanteDTO();
+    }
 
 	
 }
