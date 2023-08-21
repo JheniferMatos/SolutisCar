@@ -1,13 +1,18 @@
 package com.solutis.car.model.dto;
 
 import java.math.BigDecimal;
+
+
 import java.util.List;
 
 import com.solutis.car.model.entities.Acessorio;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.solutis.car.model.entities.Carro;
 
 // import com.solutis.car.model.entities.ModeloCarro;
+
 
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
@@ -53,14 +58,16 @@ public class CarroDTO {
     
     private FabricanteDTO fabricante;
 
-//    public CarroDTO(Carro entity) {
-//        this.id = entity.getId();
-//        this.placa = entity.getPlaca();
-//        this.chassi = entity.getChassi();
-//        this.cor = entity.getCor();
-//        this.valorDiaria = entity.getValorDiaria();
-//        this.alugado = entity.getAluguel() != null && !entity.getAluguel().isEmpty();
-//        this.imageUrl = entity.getImageUrl();
-//        this.acessorios = entity.getAcessorios();
-//    }
+    public CarroDTO(Carro entity) {
+        this.id = entity.getId();
+        this.placa = entity.getPlaca();
+        this.chassi = entity.getChassi();
+        this.cor = entity.getCor();
+        this.valorDiaria = entity.getValorDiaria();
+        this.alugado = entity.getAluguel() != null && !entity.getAluguel().isEmpty();
+        this.imageUrl = entity.getImageUrl();
+        this.acessorios = entity.getAcessorios();
+        this.fabricante = new FabricanteDTO();
+    }
 }
+
