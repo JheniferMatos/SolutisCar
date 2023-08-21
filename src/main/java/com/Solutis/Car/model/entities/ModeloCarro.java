@@ -2,7 +2,6 @@ package com.solutis.car.model.entities;
 
 import java.util.Collection;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.solutis.car.model.entities.enums.Categoria;
 
 import jakarta.persistence.*;
@@ -26,7 +25,7 @@ public class ModeloCarro {
 	@OneToMany(mappedBy = "modeloCarro",cascade = CascadeType.ALL)
 	private Collection<Carro> carro;
 
-	@JsonIgnoreProperties({"modeloCarro"})
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fabricante_id", nullable = false)
 	private Fabricante fabricante;

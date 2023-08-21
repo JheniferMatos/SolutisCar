@@ -35,11 +35,11 @@ public class CarroController {
         return ResponseEntity.status(HttpStatus.CREATED).body(novoCarroDTO);
     }
 
-    @PostMapping("/carrocompleto")
-    public ResponseEntity<CarroDTO> criarCarroCompleto(@RequestBody CarroDTO carroDTO) {
-        CarroDTO carroCriado = carroService.criarCarroCompleto(carroDTO);
-        return new ResponseEntity<>(carroCriado, HttpStatus.CREATED);
-    }
+    // @PostMapping("/carrocompleto")
+    // public ResponseEntity<CarroDTO> criarCarroCompleto(@RequestBody CarroDTO carroDTO) {
+    //     CarroDTO carroCriado = carroService.criarCarroCompleto(carroDTO);
+    //     return new ResponseEntity<>(carroCriado, HttpStatus.CREATED);
+    // }
 
     @PutMapping("/{id}")
     public ResponseEntity<CarroDTO> atualizarCarro(@PathVariable Long id, @RequestBody CarroDTO carroDTO) {

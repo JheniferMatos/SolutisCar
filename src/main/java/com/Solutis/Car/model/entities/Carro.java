@@ -2,13 +2,14 @@ package com.solutis.car.model.entities;
 
 import java.math.BigDecimal;
 
+
 import java.util.Collection;
-import java.util.HashSet;
+// import java.util.HashSet;
 
 import com.solutis.car.model.dto.CarroDTO;
 import org.hibernate.validator.constraints.URL;
-import java.util.Set;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
+// import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
@@ -59,9 +60,8 @@ public class Carro {
 
 	private boolean alugado;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "carro", cascade = CascadeType.ALL)
-	private Set<Acessorio> acessorios = new HashSet<>();
+    private List<Acessorio> acessorios;
 
 	@JsonIgnoreProperties("carro")
 	@ManyToOne(cascade = CascadeType.ALL)

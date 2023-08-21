@@ -15,7 +15,7 @@ public class ApoliceSeguro {
 	@NotBlank(message = "O valor da franquia é obrigatório")
 	@Column(nullable = false)
 	private BigDecimal valorFranquia;
-
+	
 	private boolean protecaoTerceiro = false;
 
 	private boolean protecaoCausasNaturais = false;

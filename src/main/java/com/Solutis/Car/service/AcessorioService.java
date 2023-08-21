@@ -38,21 +38,7 @@ public class AcessorioService implements CrudService<AcessorioDTO> {
                 .collect(Collectors.toList());
     }
 
-    // @Transactional
-    // public AcessorioDTO criarAcessorioCompleto(AcessorioDTO acessorioDTO) {
-    //     List<Carro> carros = new ArrayList<>();
-    //     for (Long carroId : carroIds) {
-    //         Carro carro = carroRepository.findById(carroId)
-    //                 .orElseThrow(() -> new NotFoundException("Carro não encontrado"));
-    //         carros.add(carro);
-    //     }
-
-    //     Acessorio acessorio = mapper.toEntity(acessorioDTO);
-    //     acessorio.setCarro(carros);
-
-    //     Acessorio acessorioCriado = repository.save(acessorio);
-    //     return mapper.toDto(acessorioCriado);
-    // }
+   
 
     @Transactional
     public AcessorioDTO add(AcessorioDTO acessorioDTO) {
