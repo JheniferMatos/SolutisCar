@@ -2,8 +2,6 @@ package com.solutis.car.model.entities;
 
 import java.util.Collection;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -21,7 +19,6 @@ public class Fabricante {
     @Column(nullable = false)
     private String nome;
 
-    @JsonIgnoreProperties({"fabricante"})
     @OneToMany(mappedBy = "fabricante",cascade = CascadeType.ALL)
     private Collection<ModeloCarro> modeloCarro;
 }
