@@ -1,5 +1,6 @@
 package com.solutis.car.model.dto;
 
+import com.solutis.car.model.entities.Fabricante;
 import com.solutis.car.model.entities.enums.Categoria;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,7 +18,7 @@ public class ModeloCarroDTO {
     private String descricao;
 
     @NotNull(message = "O fabricante é obrigatório")
-    private Long fabricanteId;
+    private Fabricante fabricanteId;
 
     @NotNull(message = "A categoria é obrigatória")
     private Categoria categoria;
