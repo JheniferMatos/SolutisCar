@@ -3,16 +3,13 @@ package com.solutis.car.model.entities;
 import java.math.BigDecimal;
 
 import java.util.Collection;
-
-import java.util.List;
+import java.util.HashSet;
 
 import com.solutis.car.model.dto.CarroDTO;
 import org.hibernate.validator.constraints.URL;
-
+import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import com.solutis.car.model.dto.FabricanteDTO;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -64,14 +61,12 @@ public class Carro {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "carro", cascade = CascadeType.ALL)
-	private List<Acessorio> acessorios;
+	private Set<Acessorio> acessorios = new HashSet<>();
 
 	@JsonIgnoreProperties("carro")
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "modelo_carro_id", nullable = false)
 	private ModeloCarro modeloCarro;
-	private FabricanteDTO fabricante;
-
 
 	public Carro(CarroDTO carroDTO) {
 	this.placa = carroDTO.getPlaca();
